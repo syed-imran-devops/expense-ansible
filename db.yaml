@@ -2,9 +2,9 @@
   hosts: db
   become: yes
   vars:
-    login host: db.samfuturetech.cloud
+    login host: 172.31.80.112
   vars_prompt:
-        - name:  mysql_root_password
+        - name: mysql_root_password
           prompt: please give the root password
           private: false
   tasks:
