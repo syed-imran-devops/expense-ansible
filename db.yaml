@@ -1,0 +1,40 @@
+- name: configuring packages
+  hosts: db
+  become: yes
+  vars:
+    login host: db.samfuturetech.cloud
+  vars_prompt:
+        - name:  mysql_root_password
+          prompt: please give the root password
+          private: false
+  tasks:
+  - name: installing my sql
+    ansible.builtin.dnf:
+    name: mysql-server
+    state: latest
+
+  - name: start and enable mysql server
+    ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+  - name: install python dependensies
+    ansible.builting.pip:
+      name:
+      - pymysql
+      - cryptography
+      executable: pip3.9
+
+
+
+  - name: check db connection
+    community.mysql.mysql_info:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ login_host }}"
+    filter: version 
+
+
+
+      
