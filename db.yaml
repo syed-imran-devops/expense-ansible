@@ -1,4 +1,4 @@
-- name: configuring packages
+- name: configuring db server
   hosts: db
   become: yes
   vars:
@@ -33,7 +33,7 @@
     login_user: root
     login_password: "{{ mysql_root_password }}"
     login_host: "{{ login_host }}"
-    filter: version 
+    filter: version
 
 
 
