@@ -1,2 +1,8 @@
 [db]
-54.172.212.156
+db.samfuturetech.cloud
+
+[backend]
+backend.samfuturetech.cloud
+
+[frontend]
+frontend.samfuturetech.cloud
