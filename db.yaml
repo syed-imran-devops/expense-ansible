@@ -1,5 +1,5 @@
 - name: configure db server
-  hosts: db
+  hosts: db.samfuturetech.cloud
   become: yes
   vars:
     login_host: db.samfuturetech.cloud
@@ -31,8 +31,8 @@
 - name: check DB connection
     community.mysql.mysql_info:
       login_user: root
-      login_password: "{{ mysql_root_password }}"
-      login_host: "{{ login_host }}"
+      login_password: "{{mysql_root_password}}"
+      login_host: "{{login_host}}"
       filter: version
     ignore_errors: yes
     register: mysql_connection_output
@@ -43,7 +43,7 @@
     msg: "output: {{mysql_connection_output}} "
 
 - name: setup root password
-  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
+  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{mysql_root_password}}"
   when: mysql_connection_output.failed is true
 
 
