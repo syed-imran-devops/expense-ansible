@@ -28,19 +28,19 @@
 
 
 
-- name: check DB connection
-    community.mysql.mysql_info:
-      login_user: root
-      login_password: "{{mysql_root_password}}"
-      login_host: "{{login_host}}"
-      filter: version
-    ignore_errors: yes
-    register: mysql_connection_output
+- name: Check MySQL Connection
+  hosts: db_servers
+  gather_facts: no
+  tasks:
+    - name: Get MySQL Server Info
+      community.mysql.mysql_info:
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+      register: mysql_info_result
 
-
-- name: print output
-  ansible.builtin.debug:
-    msg: "output: {{mysql_connection_output}} "
+    - name: Print MySQL Info
+      debug:
+        var: mysql_info_result
 
 - name: setup root password
   ansible.builtin.command: "mysql_secure_installation --set-root-pass {{mysql_root_password}}"
