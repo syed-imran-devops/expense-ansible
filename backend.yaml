@@ -13,9 +13,10 @@
   - name: install nodejs
     ansible.builtin.dnf: dnf install nodejs -y
       name: nodejs
-      state: installed
+      state: present
 
 
   - name: create expense user
     ansible.builtin.user:
       name: expense
+      state: present
