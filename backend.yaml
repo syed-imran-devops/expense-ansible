@@ -2,7 +2,7 @@
   become: yes
   hosts: backend
   vars:
-    login_host: db.daws78s.online
+    login_host: db.samfuturetech.cloud
     login_password: ExpenseApp@1
   tasks:
   - name: disable default nodejs
@@ -15,3 +15,13 @@
     ansible.builtin.dnf: # only works for Redhat family
       name: "{{ item }}"
       state: installed
+
+
+
+    loop:
+    - nodejs
+    - mysql
+
+  - name: create expense user
+    ansible.builtin.user:
+      name: expense
